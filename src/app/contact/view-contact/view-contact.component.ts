@@ -29,4 +29,17 @@ export class ViewContactComponent implements OnInit {
       });
     });
   }
+
+  editClicked() {
+    this.router.navigateByUrl(`/contacts/${this.contact.id}`);
+  }
+
+  deleteClicked() {
+    this.contactsService.deleteContact(this.contact);
+    this.backToList();
+  }
+
+  backToList() {
+    this.router.navigateByUrl('/contacts');
+  }
 }

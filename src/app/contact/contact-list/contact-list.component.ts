@@ -18,10 +18,6 @@ export class ContactListComponent {
   };
 
   addContact() {
-    // const contact = new Contact();
-    // contact.firstname = 'ang';
-    // contact.lastname = 'angLast';
-    // this.contactsService.postContact(contact);
     this.router.navigateByUrl(`/contacts/new`);
   }
 }

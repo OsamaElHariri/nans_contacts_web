@@ -1,10 +1,25 @@
-<div>
+<div id="form-wrapper">
     <div style="text-align: center" *ngIf="loading">
         <mat-spinner [strokeWidth]='4'></mat-spinner>
     </div>
     <div *ngIf="!loading">
         <h2>Details</h2>
-        <div>First Name: {{contact.firstname}}</div>
-        <div>Last Name: {{contact.lastname}}</div>
+        <div id="contact-info-rows">
+            <div>First Name: {{contact.firstname}}</div>
+            <div>Last Name: {{contact.lastname}}</div>
+            <div>Phone: {{contact.phone}}</div>
+            <div>Email: {{contact.email}}</div>
+        </div>
+        <div id="actions">
+            <button mat-raised-button (click)="backToList()">
+                Back
+            </button>
+            <button id="edit-btn" mat-raised-button (click)="editClicked()">
+                Edit
+            </button>
+            <button id="delete-btn" mat-raised-button (click)="deleteClicked()">
+                Delete
+            </button>
+        </div>
     </div>
 </div>

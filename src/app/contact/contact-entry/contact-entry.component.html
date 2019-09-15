@@ -1,8 +1,8 @@
-<div [ngClass]="{shrink: contactStatus == 'Deleted', expand: contact.id < 0}" class="contact-entry-wrapper">
+<div [ngClass]="{shrink: contact.state == 'Deleted', expand: contact.id < 0}" class="contact-entry-wrapper">
     <div class="contact-entry" (click)="onEntryClicked()">
-        <span [@contactStatus]="contactStatus" class="status-indicator">
-            <span class="contact-status-text">{{contactStatus}}</span>
-            <span *ngIf="contactStatus == 'Deleting'">
+        <span [@contactStatus]="contact.state" class="status-indicator">
+            <span class="contact-status-text">{{contact.state}}</span>
+            <span *ngIf="contact.state == 'Deleting'">
                 <mat-spinner [diameter]='20' [strokeWidth]='4'></mat-spinner>
             </span>
         </span>
@@ -12,7 +12,8 @@
                 <mat-spinner [diameter]='20' [strokeWidth]='4'></mat-spinner>
             </span>
         </span>
-        <span class="patch-contact-indicator" [ngClass]="{'is-patching': contact.isPatching}">
+        <span class="patch-contact-indicator"
+            [ngClass]="{'is-patching': contact.state == 'Updating'}">
             <span class="contact-status-text">Updating</span>
             <span>
                 <mat-spinner [diameter]='20' [strokeWidth]='4'></mat-spinner>
@@ -20,9 +21,8 @@
         </span>
         <div class="contact-info"> {{contact.firstname}} </div>
         <div class="contact-info">{{contact.lastname}}</div>
-        <div class="contact-info">{{contact.firstname}}</div>
-        <div class="contact-info">{{contact.lastname}}</div>
-        <div class="contact-info">{{contact.lastname}}</div>
+        <div class="contact-info">{{contact.phone}}</div>
+        <div class="contact-info">{{contact.email}}</div>
         <div class="contact-actions">
             <button mat-button (click)="editClicked($event)">
                 <mat-icon>edit</mat-icon>

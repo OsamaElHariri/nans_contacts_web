@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { Contact } from '../contact/contact';
+import { Contact, ContactState } from '../contact/contact';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,12 @@ export class ContactsService {
   getContacts(): Observable<Contact[]> {
     if (this.contacts) return of(this.contacts);
     const contactsReq = this.http.get(`${this.baseUrl}/contacts`) as Observable<Contact[]>;
-    contactsReq.subscribe((contacts) => this.contacts = contacts)
+    contactsReq.subscribe((contacts) => {
+      this.contacts = contacts;
+      this.contacts.forEach(c => {
+        c.state = ContactState.Normal;
+      });
+    })
     return contactsReq;
   }
 
@@ -26,7 +31,10 @@ export class ContactsService {
     contact.id = this.idCount--;
     this.contacts.push(contact);
     contactReq.subscribe(
-      (newContact) => contact.id = newContact.id,
+      (newContact) => {
+        contact.state = ContactState.Normal;
+        contact.id = newContact.id;
+      },
       (error) => {
         const index = this.contacts.indexOf(contact, 0);
         if (index > -1)
@@ -38,18 +46,40 @@ export class ContactsService {
   patchContact(contact: Contact): Observable<Contact> {
     const contactReq = this.http.patch(`${this.baseUrl}/contacts/${contact.id}`, contact) as Observable<Contact>;
     const contactToUpdate = this.contacts.find((c) => c.id == contact.id);
-    contactToUpdate.isPatching = true;
+    contactToUpdate.state = ContactState.Updating;
     contactReq.subscribe(
       (updatedContact) => {
-        contactToUpdate.isPatching = false;
+        contactToUpdate.state = ContactState.Normal;
         contactToUpdate.id = updatedContact.id
         contactToUpdate.firstname = updatedContact.firstname
         contactToUpdate.lastname = updatedContact.lastname
+        contactToUpdate.phone = updatedContact.phone
+        contactToUpdate.email = updatedContact.email
+      },
+      (error) => {
+        contactToUpdate.state = ContactState.Normal;
       });
     return contactReq;
   }
 
   deleteContact(contact: Contact) {
-    return this.http.delete(`${this.baseUrl}/contacts/${contact.id}`);
+    const contactReq = this.http.delete(`${this.baseUrl}/contacts/${contact.id}`);
+    contact.state = ContactState.Deleting;
+    contactReq.subscribe(
+      () => {
+        contact.state = ContactState.Deleted;
+        setTimeout(() => this.removeContact(contact), 3000);
+      },
+      (error) => {
+        contact.state = ContactState.Normal;
+      });
+    return contactReq;
+  }
+
+
+  private removeContact(contact: Contact) {
+    const index = this.contacts.indexOf(contact);
+    if (index > -1)
+      this.contacts.splice(index, 1);
   }
 }

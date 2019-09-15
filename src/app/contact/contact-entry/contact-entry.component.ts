@@ -6,7 +6,7 @@ import {
   animate,
   transition,
 } from '@angular/animations';
-import { Contact } from '../contact';
+import { Contact, ContactState } from '../contact';
 import { ContactsService } from 'src/app/services/contacts.service';
 import { Router } from '@angular/router';
 
@@ -43,36 +43,22 @@ export class ContactEntryComponent {
 
   @Input() contact: Contact;
 
-
-  contactStatus = 'Normal';
-
   constructor(private router: Router, private contactsService: ContactsService) { }
 
   deleteClicked(evt) {
     evt.stopPropagation();
-    if (this.contactStatus != 'Normal') return;
-    this.contactStatus = 'Deleting';
-    this.contactsService.deleteContact(this.contact)
-      .subscribe(() => {
-        this.contactStatus = 'Deleted';
-        setTimeout(() => this.removeContact(), 3000);
-      });
+    if (this.contact.state != ContactState.Normal) return;
+    this.contactsService.deleteContact(this.contact);
   }
 
   editClicked(evt) {
     evt.stopPropagation();
-    if (this.contactStatus != 'Normal') return;
+    if (this.contact.state != ContactState.Normal) return;
     this.router.navigateByUrl(`/contacts/${this.contact.id}`);
   }
 
-  removeContact() {
-    const index = this.contactsService.contacts.indexOf(this.contact, 0);
-    if (index > -1)
-      this.contactsService.contacts.splice(index, 1);
-  }
-
   onEntryClicked() {
-    if (this.contactStatus != 'Normal') return;
+    if (this.contact.state != ContactState.Normal) return;
     this.router.navigateByUrl(`/contacts/details/${this.contact.id}`);
   }
 
