@@ -1,0 +1,21 @@
+@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+:root {
+  --primary-color: rgb(148, 19, 141);
+  --primary-color-faded: rgba(148, 19, 141, 0.075);
+  --primary-text-color: white;
+  --danger-color: rgb(202, 10, 42);
+  --danger-text-color: white;
+  --completed-color: rgb(16, 185, 129);
+  --completed-text-color: white;
+}
+
+body {
+  margin: 0px;
+  height: 100vh;
+}
+
+.mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: white;
+}

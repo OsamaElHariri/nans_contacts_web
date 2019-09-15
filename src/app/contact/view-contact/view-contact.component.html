@@ -1,0 +1,10 @@
+<div>
+    <div style="text-align: center" *ngIf="loading">
+        <mat-spinner [strokeWidth]='4'></mat-spinner>
+    </div>
+    <div *ngIf="!loading">
+        <h2>Details</h2>
+        <div>First Name: {{contact.firstname}}</div>
+        <div>Last Name: {{contact.lastname}}</div>
+    </div>
+</div>

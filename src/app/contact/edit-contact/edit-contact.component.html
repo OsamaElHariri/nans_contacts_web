@@ -1,0 +1,20 @@
+<div>
+    <div style="text-align: center" *ngIf="loading">
+        <mat-spinner [strokeWidth]='4'></mat-spinner>
+    </div>
+    <div *ngIf="!loading">
+        <h2>{{isEditing? "Edit Contact" : "Add New Contact"}}</h2>
+            <div>First Name</div>
+            <input type="text" [(ngModel)]="contact.firstname">
+            <div>Last Name</div>
+            <input type="text" [(ngModel)]="contact.lastname">
+            <div>
+                <button mat-raised-button (click)="backToList()">
+                    Cancel
+                </button>
+                <button mat-raised-button (click)="onSubmit()">
+                    Submit
+                </button>
+            </div>
+    </div>
+</div>

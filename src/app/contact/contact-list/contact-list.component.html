@@ -1,0 +1,12 @@
+<div id="main-content">
+    <div *ngIf="contacts.length" id="list-container">
+        <button mat-raised-button (click)="addContact()">
+            <mat-icon>add</mat-icon>
+            New Contact
+        </button>
+        <div>
+            <app-contact-entry *ngFor="let contact of contactsService.contacts" [contact]="contact">
+            </app-contact-entry>
+        </div>
+    </div>
+</div>
