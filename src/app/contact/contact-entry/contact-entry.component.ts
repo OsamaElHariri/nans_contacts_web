@@ -14,9 +14,6 @@ import { Router } from '@angular/router';
   selector: 'app-contact-entry',
   templateUrl: './contact-entry.component.html',
   styleUrls: ['./contact-entry.component.scss'],
-  host: {
-    '(@contactStatus.done)': 'captureDoneEvent($event)',
-  },
   animations: [
     trigger('contactStatus', [
       state('Normal', style({

@@ -14,7 +14,7 @@ export class ContactListComponent {
   loading: boolean = true;
   contacts: Contact[] = [];
 
-  constructor(private router: Router, private contactsService: ContactsService) {
+  constructor(private router: Router, public contactsService: ContactsService) {
     this.contactsService.getContacts().subscribe((contacts: any) => {
       this.loading = false;
       this.contacts = contacts;
