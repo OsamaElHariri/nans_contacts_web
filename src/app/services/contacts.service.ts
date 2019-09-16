@@ -9,9 +9,9 @@ import { Contact, ContactState } from '../contact/contact';
 export class ContactsService {
   idCount = -1;
   contacts: Contact[];
+  hasHadContacts = false;
 
-  private baseUrl = "http://localhost:8000";
-  // private baseUrl = "http://34.77.163.147:8000";
+  private baseUrl = "http://34.77.163.147:8000";
   constructor(private http: HttpClient) { }
 
   getContacts(): Observable<Contact[]> {
@@ -19,6 +19,7 @@ export class ContactsService {
     const contactsReq = this.http.get(`${this.baseUrl}/contacts`) as Observable<Contact[]>;
     contactsReq.subscribe((contacts) => {
       this.contacts = contacts;
+      if (contacts.length) this.hasHadContacts = true;
       this.contacts.forEach(c => {
         c.state = ContactState.Normal;
       });
@@ -34,6 +35,7 @@ export class ContactsService {
       (newContact) => {
         contact.state = ContactState.Normal;
         contact.id = newContact.id;
+        this.hasHadContacts = true;
       },
       (error) => {
         const index = this.contacts.indexOf(contact, 0);
@@ -68,7 +70,7 @@ export class ContactsService {
     contactReq.subscribe(
       () => {
         contact.state = ContactState.Deleted;
-        setTimeout(() => this.removeContact(contact), 3000);
+        setTimeout(() => this.removeContact(contact), 1300);
       },
       (error) => {
         contact.state = ContactState.Normal;

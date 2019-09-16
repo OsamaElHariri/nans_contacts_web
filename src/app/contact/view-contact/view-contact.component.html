@@ -1,8 +1,6 @@
 <div id="form-wrapper">
-    <div style="text-align: center" *ngIf="loading">
-        <mat-spinner [strokeWidth]='4'></mat-spinner>
-    </div>
-    <div *ngIf="!loading">
+    <app-granny-loader *ngIf="loading" [loading]="true"></app-granny-loader>
+    <div id="contact-details" *ngIf="!loading">
         <h2>Details</h2>
         <div id="contact-info-rows">
             <div>First Name: {{contact.firstname}}</div>

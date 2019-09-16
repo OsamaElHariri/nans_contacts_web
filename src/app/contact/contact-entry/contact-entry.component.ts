@@ -20,17 +20,14 @@ import { Router } from '@angular/router';
   animations: [
     trigger('contactStatus', [
       state('Normal', style({
-        left: 'calc(100% - 16.5%)',
         top: '-100%',
-        width: '16.5%',
+        width: '20%',
       })),
       state('Deleting', style({
-        left: 'calc(100% - 16.5%)',
         top: '0%',
-        width: '16.5%',
+        width: '20%',
       })),
       state('Deleted', style({
-        left: '0%',
         top: '0%',
         width: '100%',
       })),

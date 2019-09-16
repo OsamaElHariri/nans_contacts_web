@@ -9,10 +9,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./contact-list.component.scss']
 })
 export class ContactListComponent {
+  firstPromptText: string = "Oh dear! I wonder who I should add first";
+  secondPromptText: string = "Hmmm... Who should I add now?";
+  loading: boolean = true;
   contacts: Contact[] = [];
 
   constructor(private router: Router, private contactsService: ContactsService) {
     this.contactsService.getContacts().subscribe((contacts: any) => {
+      this.loading = false;
       this.contacts = contacts;
     });
   };
@@ -20,4 +24,5 @@ export class ContactListComponent {
   addContact() {
     this.router.navigateByUrl(`/contacts/new`);
   }
+
 }

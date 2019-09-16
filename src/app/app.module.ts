@@ -15,6 +15,7 @@ import { ContactEntryComponent } from './contact/contact-entry/contact-entry.com
 import { ContactListComponent } from './contact/contact-list/contact-list.component';
 import { EditContactComponent } from './contact/edit-contact/edit-contact.component';
 import { ViewContactComponent } from './contact/view-contact/view-contact.component';
+import { GrannyLoaderComponent } from './loader/granny-loader/granny-loader.component';
 
 const appRoutes: Routes = [
   { path: 'contacts/details/:id', component: ViewContactComponent },
@@ -35,7 +36,8 @@ const appRoutes: Routes = [
     ContactEntryComponent,
     ContactListComponent,
     EditContactComponent,
-    ViewContactComponent
+    ViewContactComponent,
+    GrannyLoaderComponent
   ],
   imports: [
     BrowserModule,

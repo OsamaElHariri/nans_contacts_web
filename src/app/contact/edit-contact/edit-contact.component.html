@@ -1,8 +1,6 @@
 <div id="form-wrapper">
-    <div style="text-align: center" *ngIf="loading">
-        <mat-spinner [strokeWidth]='4'></mat-spinner>
-    </div>
-    <div *ngIf="!loading">
+    <app-granny-loader *ngIf="loading" [loading]="true"></app-granny-loader>
+    <div id="contact-form" *ngIf="!loading">
         <h2>{{isEditing? "Edit Contact" : "Add New Contact"}}</h2>
         <div>First Name</div>
         <input type="text" [(ngModel)]="contact.firstname">

@@ -1,0 +1,17 @@
+<div id="loader-wrapper">
+    <div id="granny-loader">
+        <div id="granny-body-wrapper">
+            <img [ngClass]="{animated: loading}" id="granny-body" src="assets/granny_body.png">
+            <img [ngClass]="{animated: loading}" id="granny-cane" src="assets/granny_cane.png">
+            <img [ngClass]="{animated: loading}" id="granny-left-foot" class="granny-foot" src="assets/granny_foot.png">
+            <img [ngClass]="{animated: loading}" id="granny-right-foot" class="granny-foot"
+                src="assets/granny_foot.png">
+        </div>
+    </div>
+    <h2 *ngIf="loading" class="helper-text">{{loadingText}}</h2>
+    <h2 *ngIf="!loading" class="helper-text">{{promptText}}</h2>
+    <button *ngIf="!loading" mat-raised-button (click)="onPromptClicked()">
+        <mat-icon>add</mat-icon>
+        New Contact
+    </button>
+</div>
