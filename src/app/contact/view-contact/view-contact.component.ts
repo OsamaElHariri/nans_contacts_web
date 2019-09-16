@@ -31,7 +31,7 @@ export class ViewContactComponent implements OnInit {
   }
 
   editClicked() {
-    this.router.navigateByUrl(`/contacts/${this.contact.id}`);
+    this.router.navigateByUrl(`/contacts/edit/${this.contact.id}`);
   }
 
   deleteClicked() {

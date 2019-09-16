@@ -18,9 +18,9 @@ import { ViewContactComponent } from './contact/view-contact/view-contact.compon
 import { GrannyLoaderComponent } from './loader/granny-loader/granny-loader.component';
 
 const appRoutes: Routes = [
-  { path: 'contacts/details/:id', component: ViewContactComponent },
+  { path: 'contacts/edit/:id', component: EditContactComponent },
   { path: 'contacts/new', component: EditContactComponent },
-  { path: 'contacts/:id', component: EditContactComponent },
+  { path: 'contacts/:id', component: ViewContactComponent },
   { path: 'contacts', component: ContactListComponent },
   {
     path: '',

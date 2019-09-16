@@ -48,12 +48,12 @@ export class ContactEntryComponent {
   editClicked(evt) {
     evt.stopPropagation();
     if (this.contact.state != ContactState.Normal) return;
-    this.router.navigateByUrl(`/contacts/${this.contact.id}`);
+    this.router.navigateByUrl(`/contacts/edit/${this.contact.id}`);
   }
 
   onEntryClicked() {
     if (this.contact.state != ContactState.Normal) return;
-    this.router.navigateByUrl(`/contacts/details/${this.contact.id}`);
+    this.router.navigateByUrl(`/contacts/${this.contact.id}`);
   }
 
 }
