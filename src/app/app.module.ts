@@ -52,6 +52,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(
       appRoutes,
+      { useHash: true }
     )
   ],
   providers: [],
