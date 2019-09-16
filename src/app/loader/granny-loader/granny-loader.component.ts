@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class GrannyLoaderComponent implements OnInit {
 
-  @Input() loading: boolean;
+  @Input() loading: boolean = true;
   @Input() onPromptClicked: Function;
   @Input() promptText: string;
 

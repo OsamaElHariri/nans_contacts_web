@@ -22,6 +22,7 @@ const appRoutes: Routes = [
   { path: 'contacts/new', component: EditContactComponent },
   { path: 'contacts/:id', component: ViewContactComponent },
   { path: 'contacts', component: ContactListComponent },
+  { path: 'loader', component: GrannyLoaderComponent },
   {
     path: '',
     redirectTo: '/contacts',
